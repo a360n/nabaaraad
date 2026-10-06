@@ -3476,8 +3476,8 @@
     }
 
     @media print {
-      body * {
-        visibility: hidden !important;
+      body > *:not(.cv-modal) {
+        display: none !important;
       }
 
       .cv-modal,
@@ -3549,13 +3549,13 @@
   <nav>
     <div class="logo">NABAA <span class="spark">✦</span></div>
     <div class="nav-right">
-      <button id="themeToggle" class="nav-btn" aria-label="Switch between day and night mode" aria-pressed="false"
-      <button id="musicToggle" class="nav-btn" onclick="toggleMusic()" aria-label="Toggle Music" title="Play/Pause Music">🎵</button>
-        title="Day / Night">☀️</button>
+      <button id="themeToggle" class="nav-btn" aria-label="Switch between day and night mode" aria-pressed="false" title="Day / Night"></button>
+      <button id="musicToggle" class="nav-btn" onclick="toggleMusic()" aria-label="Toggle Music" title="Play/Pause Music"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+
       <button id="langToggle" class="nav-btn" onclick="toggleLang()" aria-label="تبديل اللغة / Toggle Language"
         title="Toggle Arabic / English">العربية</button>
       <button id="cvNavBtn" class="nav-btn" onclick="openCvModal()" aria-label="View and Download CV"
-        title="عرض وتحميل السيرة الذاتية"><span>CV</span> 📄</button>
+        title="عرض وتحميل السيرة الذاتية"><span>CV</span></button>
       <button id="navToggle" aria-label="menu">EXPLORE</button>
       <ul class="navlinks" id="navlinks">
         <li><a href="#story" id="navLinkStory">The Story</a></li>
@@ -4673,9 +4673,9 @@
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <button class="nav-btn" onclick="openCvModal()" style="padding:10px 20px; font-size:.9rem;"
-              id="availCvBtn">Download CV 📄</button>
+              id="availCvBtn">Download CV</button>
             <a href="#hello" class="contact-pill" style="padding:10px 20px; font-size:.9rem;"
-              id="availTalkBtn">Let's Talk 💬</a>
+              id="availTalkBtn">Let's Talk</a>
           </div>
         </div>
 
@@ -4739,12 +4739,9 @@
 
       <!-- Direct Contact Actions -->
       <div class="contact-pills" style="justify-content:center; margin-top:16px;">
-        <a class="contact-pill" href="mailto:nbardsdwn@gmail.com">
-          <span>✉️</span> <span id="mailPillText">nbardsdwn@gmail.com</span>
+        <a class="contact-pill" href="mailto:nbardsdwn@gmail.com" target="_blank">
+          <span id="mailPillText">nbardsdwn@gmail.com</span>
         </a>
-        <button class="contact-pill" onclick="copyEmail(this)" style="cursor:pointer;" title="Copy Email">
-          <span></span> <span id="copyPillText">Copy Email</span>
-        </button>
         <a class="contact-pill linkedin" href="https://www.linkedin.com/in/nabaa-raad-883a15249" target="_blank"
           rel="noopener">
           <span></span> <span>LinkedIn</span>
@@ -4779,10 +4776,6 @@
           <button class="cv-action-btn print" onclick="window.print()" title="Save as PDF or Print">
             <span></span> <span id="cvPrintBtnText">Save as PDF / Print</span>
           </button>
-          <button class="cv-action-btn" onclick="copyCvText(this)" title="Copy Plain Text">
-            <span></span> <span id="cvCopyBtnText">Copy Text</span>
-          </button>
-          <button class="cv-close-btn" onclick="closeCvModal()" aria-label="Close CV">×</button>
         </div>
       </div>
 
@@ -4794,8 +4787,7 @@
           </div>
           <div class="cv-doc-contacts">
             <span> 📍 Baghdad Governorate, Iraq</span>
-            <span> <a href="mailto:nbardsdwn@gmail.com">nbardsdwn@gmail.com</a></span>
-            <span> <a href="https://wa.me/9647736236446">+964 773 623 6446</a></span>
+            <span> <a href="mailto:nbardsdwn@gmail.com" target="_blank">nbardsdwn@gmail.com</a></span>
             <span><a href="https://www.linkedin.com/in/nabaa-raad-883a15249"
                 target="_blank">linkedin.com/in/nabaaraad</a></span>
             <span> <a href="https://t.me/N_S_O2" target="_blank">t.me/N_S_O2</a></span>
@@ -4979,7 +4971,7 @@
       function effective() { const s = localStorage.getItem(KEY); return s || (sysDark() ? 'dark' : 'light'); }
       function paint() {
         const eff = effective();
-        btn.textContent = eff === 'dark' ? '🌙' : '☀️';
+        const iconSun = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`; const iconMoon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`; btn.innerHTML = eff === 'dark' ? iconMoon : iconSun;
         btn.setAttribute('aria-pressed', eff === 'dark');
       }
       const saved = localStorage.getItem(KEY);
@@ -5410,15 +5402,27 @@ Customer Experience, CRM Platforms, Ticket Escalation, Customer Journey Mapping,
 </body>
 <script>
 let isMusicPlaying = false;
+function initMusic() {
+  if (!isMusicPlaying) {
+    toggleMusic();
+  }
+  window.removeEventListener("click", initMusic);
+  window.removeEventListener("scroll", initMusic);
+  window.removeEventListener("touchstart", initMusic);
+}
+window.addEventListener("click", initMusic);
+window.addEventListener("scroll", initMusic);
+window.addEventListener("touchstart", initMusic);
+
 function toggleMusic() {
   const music = document.getElementById('bg-music');
   const btn = document.getElementById('musicToggle');
   if (isMusicPlaying) {
     music.pause();
-    btn.innerHTML = '🎵';
+    btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
   } else {
     music.play().catch(e => console.log("Audio play failed:", e));
-    btn.innerHTML = '⏸️';
+    btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>`;
   }
   isMusicPlaying = !isMusicPlaying;
 }
